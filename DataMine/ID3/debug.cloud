@@ -1,0 +1,535 @@
+No::__set_state(array(
+   'filhos' => 
+  array (
+    'noite' => 
+    No::__set_state(array(
+       'filhos' => 
+      array (
+        'bom' => 
+        No::__set_state(array(
+           'filhos' => 
+          array (
+            0 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+            1 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+          ),
+           'classe' => 'isca',
+           'ganho' => 0.546,
+        )),
+        'chuvoso' => 
+        No::__set_state(array(
+           'filhos' => 
+          array (
+            0 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+            1 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+          ),
+           'classe' => 'isca',
+           'ganho' => 0.546,
+        )),
+        'nublado' => 
+        No::__set_state(array(
+           'filhos' => 
+          array (
+            0 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+            1 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+          ),
+           'classe' => 'isca',
+           'ganho' => 0.546,
+        )),
+      ),
+       'classe' => 'tempo',
+       'ganho' => 0.571,
+    )),
+    'manha' => 
+    No::__set_state(array(
+       'filhos' => 
+      array (
+        'bom' => 
+        No::__set_state(array(
+           'filhos' => 
+          array (
+            0 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+            1 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+          ),
+           'classe' => 'isca',
+           'ganho' => 0.546,
+        )),
+        'chuvoso' => 
+        No::__set_state(array(
+           'filhos' => 
+          array (
+            0 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+            1 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+          ),
+           'classe' => 'isca',
+           'ganho' => 0.546,
+        )),
+        'nublado' => 
+        No::__set_state(array(
+           'filhos' => 
+          array (
+            0 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+            1 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+          ),
+           'classe' => 'isca',
+           'ganho' => 0.546,
+        )),
+      ),
+       'classe' => 'tempo',
+       'ganho' => 0.571,
+    )),
+    'tarde' => 
+    No::__set_state(array(
+       'filhos' => 
+      array (
+        'bom' => 
+        No::__set_state(array(
+           'filhos' => 
+          array (
+            0 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+            1 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+          ),
+           'classe' => 'isca',
+           'ganho' => 0.546,
+        )),
+        'chuvoso' => 
+        No::__set_state(array(
+           'filhos' => 
+          array (
+            0 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+            1 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+          ),
+           'classe' => 'isca',
+           'ganho' => 0.546,
+        )),
+        'nublado' => 
+        No::__set_state(array(
+           'filhos' => 
+          array (
+            0 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+            1 => 
+            No::__set_state(array(
+               'filhos' => 
+              array (
+                'alta' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+                'baixa' => 
+                No::__set_state(array(
+                   'filhos' => 
+                  array (
+                  ),
+                   'classe' => 'media',
+                   'ganho' => 0,
+                )),
+              ),
+               'classe' => 'profundidade',
+               'ganho' => 0.199,
+            )),
+          ),
+           'classe' => 'isca',
+           'ganho' => 0.546,
+        )),
+      ),
+       'classe' => 'tempo',
+       'ganho' => 0.571,
+    )),
+  ),
+   'classe' => 'horario',
+   'ganho' => 0.79,
+))
