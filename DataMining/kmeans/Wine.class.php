@@ -16,4 +16,12 @@ class Wine
     public $diluted_wines;
     public $proline;            
     
+    /**
+     * @param $center 
+     * @return int representando a distancia de $this ate $center
+     */
+    public function distance_euclidian(Wine $center)
+    {
+        return rand(0,1000);
+    }
 }

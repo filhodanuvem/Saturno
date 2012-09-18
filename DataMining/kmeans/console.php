@@ -15,7 +15,7 @@ $k = array_key_exists(2,$argv)?$argv[2]:3;
 // lendo o arquivo e criando as instâncias da classe Wine 
 /* @var $instances Array contém todas as instâncas Wine */ 
 $instances = array();
-$fp = fopen('Wine.txt','r');
+$fp = fopen(__DIR__.'/Wine.txt','r');
 while($line = fgets($fp)){
     $instance = new Wine;
     $data     = explode("\t",$line);
@@ -28,13 +28,17 @@ while($line = fgets($fp)){
     $instances[] = $instance;
 }
 
-
-// seleciono os centros 
+// seleciono os centros (instancias aleatorias)
 $i = 0;
 $centers = array();
-for($i < $k){
+while($i < $k){
     $key_aleatory =  rand(0,count($instances)); 
-    $centers[]    =  $instances[$key_aleatory];
+    $centers[$i++]    =  $instances[$key_aleatory];
 }
 
+// agrupo cada instancia em seu centro mais proximo (meio kdd, isso, não?)
+$groups = doGroup($instances,$centers);
+
+//var_dump($groups,count($instances));
+fclose($fp);
 
