@@ -17,3 +17,15 @@ function doGroup($instances,$centers){
     return $groups;
 }
     
+
+function printGroups($groups,$centers = null){
+    if($centers){
+        foreach($centers as $index => $center){
+            echo sprintf("Center %d => %s \n",$index,$center);
+        }
+        echo "\n\n";
+    }
+    foreach($groups as $index => $group){
+        echo sprintf("Grupo %d (%d) \n",$index,count($group));
+    }
+}

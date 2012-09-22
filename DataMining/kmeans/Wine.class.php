@@ -22,6 +22,20 @@ class Wine
      */
     public function distance_euclidian(Wine $center)
     {
-        return rand(0,1000);
+        $attributes = get_object_vars($this);
+        $distance   = 0; 
+        foreach($attributes as $attr => $val){
+            // ( center.atributo - this.atributo )2
+            $sub  = abs($center->$attr - $val);
+            $sub *=  $sub; 
+            $distance += $sub; 
+        }
+        return sqrt($distance);
     }
+    
+    public function __toString()
+    {
+        return $this->alcohol;
+    }
+    
 }

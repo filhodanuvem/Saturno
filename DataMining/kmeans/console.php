@@ -12,6 +12,7 @@ require 'Wine.class.php';
 $method_distance = array_key_exists(1,$argv)?$argv[1]:'euclidian';
 $k = array_key_exists(2,$argv)?$argv[2]:3;
 
+
 // lendo o arquivo e criando as instâncias da classe Wine 
 /* @var $instances Array contém todas as instâncas Wine */ 
 $instances = array();
@@ -38,7 +39,7 @@ while($i < $k){
 
 // agrupo cada instancia em seu centro mais proximo (meio kdd, isso, não?)
 $groups = doGroup($instances,$centers);
+printGroups($groups,$centers);
 
-//var_dump($groups,count($instances));
 fclose($fp);
 
