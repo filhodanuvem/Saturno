@@ -2,8 +2,9 @@
 /**
  * @author Claudson Oliveira 17/09/2012
  * 
- * 
  */
+
+define('MAX_ITERATIONS',10);
 
 require 'functions.php';
 require 'Wine.class.php';
@@ -30,16 +31,37 @@ while($line = fgets($fp)){
 }
 
 // seleciono os centros (instancias aleatorias)
-$i = 0;
+$j = 0;
 $centers = array();
-while($i < $k){
-    $key_aleatory =  rand(0,count($instances)); 
-    $centers[$i++]    =  $instances[$key_aleatory];
+while($j < $k){
+    $key_aleatory  =  rand(0,count($instances)); 
+    $centers[$j++] =  $instances[$key_aleatory];
 }
 
-// agrupo cada instancia em seu centro mais proximo (meio kdd, isso, não?)
-$groups = doGroup($instances,$centers);
-printGroups($groups,$centers);
-
+$i = 0 ;
+do{
+    // agrupo cada instancia em seu centro mais proximo (meio kdd, isso, não?)
+    $groups = doGroup($instances,$centers);
+    printGroups($groups,$centers);
+    
+    // crio novos centros baseado na media dos grupos
+    $newCenters = array();
+    $j =0;
+    foreach($groups as $group){
+        $newCenters[$j++] =  mediaGroup($group);
+    }
+    
+    $inTheEnd = true;
+    foreach($newCenters as $index => $newCenter){
+        if(spl_object_hash($newCenter) != spl_object_hash($centers[$index])){
+            $centers = $newCenters;
+            $inTheEnd = false;
+            break;
+        }
+    }
+    $i++;
+}while( !$inTheEnd || $i < MAX_ITERATIONS );
+    
+echo "Numero de iterações {$i} ";
 fclose($fp);
 
