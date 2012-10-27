@@ -62,7 +62,9 @@ public class GrupoManager {
             }
             i++;
         }
-        
+        if(centro == this.centros.length) {
+            centro -= 1;
+        }
         return centro;
     }
     
@@ -80,7 +82,7 @@ public class GrupoManager {
             }
             i++;
         }
-        
+       
         return instancia;
     }
     

@@ -25,7 +25,7 @@ public class Grupo
     }
     
     public void remove(Wine instancia){
-        this.remove(instancia);
+        this.instancias.remove(instancia);
     }
 
     @Override
