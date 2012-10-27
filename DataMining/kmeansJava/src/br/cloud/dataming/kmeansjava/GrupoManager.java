@@ -121,6 +121,7 @@ public class GrupoManager {
     }
     
     public void estatisticas(Wine[] instancias){
+        this.ordenaGrupos();
         int i=0;
         int[] contadores_classes = new int[this.k];
         while(i < this.k) {
@@ -134,11 +135,41 @@ public class GrupoManager {
             i++;
         }
         i=0;
+        
+        // imprimo o numero de instancias que o grupo X esperava 
         while(i < this.k) {
-            System.out.println("Grupo "+(i+1)+" esperava"+contadores_classes[i++]);
+            System.out.println("Grupo "+(i+1)+" esperava "+contadores_classes[i++]);
+        }
+        System.out.println("");
+        i = 0;
+        while(i < this.k) {
+            int j = 0;
+            while(j < this.grupos[i].size()) {
+                Wine instancia = this.grupos[i].get(j);
+                
+                System.out.println(instancia);
+                j++;
+            }
+            i++;
         }
         
-        
-       
+    }
+    
+    protected void ordenaGrupos(){
+        Grupo[] novoGrupos =null;
+        for(int i=0; i<this.k;i++ ){
+            Grupo fixo = this.grupos[i];
+            for(int j=0; j<this.k; j++){
+                Grupo atual = this.grupos[j];
+                if(atual.size() > fixo.size()){
+                    Grupo aux = atual;
+                    atual = fixo;
+                    fixo = aux;
+                    
+                    this.grupos[i] = fixo;
+                    this.grupos[j] = atual;
+                }
+            }
+        }
     }
 }

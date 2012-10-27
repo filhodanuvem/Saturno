@@ -72,6 +72,10 @@ public class KmeansJava {
         }
         System.out.println("Iterou por "+i+" vezes");
         grupos.estatisticas(instancias);
+        for(int j=0; j<grupos.k; j++){
+            Grupo grupo = grupos.grupos[j];
+            System.out.println("grupo ordenado("+j+"): "+grupo+", centro:"+grupo.centro);
+        }
     }
     
 }   
