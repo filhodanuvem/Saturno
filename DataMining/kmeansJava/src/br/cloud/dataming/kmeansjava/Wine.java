@@ -20,6 +20,8 @@ public class Wine
     public double diluted_wines;
     public double proline;
     
+    public int real_class;
+    
     public double distance_euclidian(Wine center)
     {
         double distance = 0;
@@ -36,8 +38,9 @@ public class Wine
         distance += Math.pow(center.nonflavanoid_phenols - this.nonflavanoid_phenols,2);
         distance += Math.pow(center.proline - this.proline,2);
         distance += Math.pow(center.total_phenols - this.total_phenols,2);
-                
-        return distance;
+        distance += Math.pow(center.proanthocyanins - this.proanthocyanins,2);
+        
+        return Math.sqrt(distance);
     }
     
     public void set(int i,double valor)
@@ -91,6 +94,14 @@ public class Wine
             case 11:
                 this.total_phenols = valor;
                 break;
+                
+            case 12:
+                this.proanthocyanins = valor;
+                break;
+                
+            case 13:
+                this.real_class = (int)valor;
+                break;
               
         }
     }
@@ -134,9 +145,27 @@ public class Wine
 
             case 11:
                 return this.total_phenols;
+            
+            case 12:
+                return this.proanthocyanins;
+                
+            case 13:
+                return this.real_class;
                 
               
         }
         return 0;
     }
+
+    @Override
+    public String toString() {
+        String texto = "[";
+        for(int i=0; i<= 13; i++){
+            texto += this.get(i)+", ";
+        }
+        texto += "]";
+        return texto;
+    }
+    
+    
 }

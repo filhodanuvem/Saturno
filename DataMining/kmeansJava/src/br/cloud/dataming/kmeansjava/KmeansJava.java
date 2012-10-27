@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class KmeansJava {
     
     static final int NUMERO_INSTANCIAS = 178;
-    static final int K = 4;
+    static final int K = 3;
     static final int LOOP_MAX = 100;
     
     
@@ -42,32 +42,36 @@ public class KmeansJava {
         }
         GrupoManager grupos = new GrupoManager(K, centros);
         i = 0;
-
+        
         while(i < LOOP_MAX) {
             int j = 0;
             while(j < NUMERO_INSTANCIAS) {
                 Wine instanciaAtual = instancias[j];
-                int centro = grupos.seleciona(instanciaAtual);
-                grupos.addInstancia(instanciaAtual,centro);
+                int idgrup = grupos.seleciona(instanciaAtual);
+                grupos.addInstancia(instanciaAtual,idgrup);
                 j++;
             }
             
             for(j=0; j < grupos.k; j++) {
                 Grupo  grupo = grupos.grupos[j];
+                System.out.println("grupo: ("+i+","+j+")"+grupo+", centro:"+grupo.centro);
                 Wine pseudo = grupos.geraPseudoInstanciaMedia(grupo);
                 centros[j] = grupos.instanciaMaisProxima(pseudo, grupo);
-                grupo.setCentro(centros[j]);
-                System.out.println("grupo: ("+i+","+j+")"+grupo+"");
+                
             }
             System.out.println("\n");
+            for(j=0; j<grupos.k; j++){
+                grupos.grupos[j].setCentro(centros[j]);
+            }
             i++;
             
             if(!grupos.temMudancas()){
-                System.out.println("Iterou por "+i+" vezes");
                break;
             }
             grupos.zerarMudancas();
         }
+        System.out.println("Iterou por "+i+" vezes");
+        grupos.estatisticas(instancias);
     }
     
 }   

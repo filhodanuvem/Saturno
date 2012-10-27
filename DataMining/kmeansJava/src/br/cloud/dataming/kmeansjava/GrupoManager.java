@@ -1,6 +1,8 @@
 
 package br.cloud.dataming.kmeansjava;
 
+import java.util.ListIterator;
+
 /**
  *
  * @author Claudson Oliveira
@@ -10,28 +12,28 @@ public class GrupoManager {
     protected Grupo[] grupos;
     protected int k;
     protected int mudancas = 0;
-    protected Wine[] centros;
     
     
     public GrupoManager(int k, Wine[] centros){
         this.grupos = new Grupo[k];
         for(int i = 0; i < k; i++){
             this.grupos[i] = new Grupo();
+            this.grupos[i].setCentro(centros[i]);
         }
         this.k = k;
-        this.centros = centros;
+        
     }
     
-    public void addInstancia(Wine instancia, int grupo){
-        if(this.k <= grupo){
+    public void addInstancia(Wine instancia, int id){
+        if(this.k <= id){
             throw new IllegalArgumentException("Grupo inexistente");
         }
         
-        if(!this.grupos[grupo].contains(instancia)){
-            this.grupos[grupo].add(instancia);
+        if(!this.grupos[id].contains(instancia)){
+            this.grupos[id].add(instancia);
             
             for(int i=0; i < this.k; i++){
-                if(this.grupos[i].contains(instancia) && i != grupo){
+                if(i != id && this.grupos[i].contains(instancia)){
                     this.grupos[i].remove(instancia);
                     break;
                 }
@@ -54,51 +56,39 @@ public class GrupoManager {
     {
         int i = 0, centro = 0;
         double distancia = 0,menorDistancia = Double.MAX_VALUE; 
-        while(i < this.centros.length){
-            distancia = wine.distance_euclidian(this.centros[i]);
+        while(i < this.k){
+            distancia = wine.distance_euclidian(this.grupos[i].centro);
             if(distancia < menorDistancia){
-                centro = i;
                 menorDistancia = distancia;
+                centro = i;
             }
             i++;
         }
-        if(centro == this.centros.length) {
-            centro -= 1;
-        }
+        
         return centro;
     }
     
     public Wine instanciaMaisProxima(Wine pivo, Grupo grupo)
     {
-        Wine instancia = null;
-        int i = 0, centro = 0;
+        Wine instancia = null, maisProxima = null;
+        int i = 0;
         double distancia = 0,menorDistancia = Double.MAX_VALUE; 
-        while(i < this.centros.length){
-            instancia = grupo.instancias.get(i);
+        ListIterator<Wine> list = grupo.instancias.listIterator();
+        
+        while(list.hasNext()){
+            instancia = list.next();
             distancia = pivo.distance_euclidian(instancia);
             if(distancia < menorDistancia){
-                centro = i;
                 menorDistancia = distancia;
+                maisProxima = instancia;
             }
             i++;
         }
        
-        return instancia;
+        return maisProxima;
     }
     
-    public Wine[] getCentros()
-    {
-        Wine[] centros = new Wine[this.k];
-        Wine[] pseudoInstanciasMedias = new Wine[this.k];
-        
-        for(int i =0; i < this.k; i++){
-            pseudoInstanciasMedias[i] = this.geraPseudoInstanciaMedia(this.grupos[i]);
-        }
-        
-        this.centros = centros;
-        return centros;
-    }
-
+   
     @Override
     public String toString() {
         String texto = "";
@@ -128,5 +118,27 @@ public class GrupoManager {
             }   
         }
         return instancia;
+    }
+    
+    public void estatisticas(Wine[] instancias){
+        int i=0;
+        int[] contadores_classes = new int[this.k];
+        while(i < this.k) {
+            contadores_classes[i] =0;
+            i++;
+        }
+        i=0;
+        while(i < KmeansJava.NUMERO_INSTANCIAS) {
+            Wine atual = instancias[i];
+            contadores_classes[atual.real_class - 1]++;
+            i++;
+        }
+        i=0;
+        while(i < this.k) {
+            System.out.println("Grupo "+(i+1)+" esperava"+contadores_classes[i++]);
+        }
+        
+        
+       
     }
 }
