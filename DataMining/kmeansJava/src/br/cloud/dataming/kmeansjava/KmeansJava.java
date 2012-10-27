@@ -1,4 +1,4 @@
-package kmeansjava;
+package br.cloud.dataming.kmeansjava;
 
 import java.util.HashMap;
 
@@ -20,8 +20,6 @@ public class KmeansJava {
      */
     public static void main(String[] args) {
         
-        
-        
         Leitor leitor = new Leitor("Wine.txt");
         Wine[] instancias = new Wine[NUMERO_INSTANCIAS];
         String linha = null;
@@ -30,7 +28,6 @@ public class KmeansJava {
             i =0;
             while ((linha = leitor.getLinha()) != null) {
                 instancias[i++] = WineFactory.criarWine(linha);
-                System.out.println(instancias[i - 1]);
             }
         }catch(Exception e){
             System.out.println("erro!");
@@ -41,24 +38,33 @@ public class KmeansJava {
         Wine[] centros = new Wine[K];
         while(i < K){
             int indice = (int) (Math.random() * NUMERO_INSTANCIAS - 1) ;
-            centros[i] = instancias[indice];
+            centros[i++] = instancias[indice];
         }
-        
-        // 
+        GrupoManager grupos = new GrupoManager(K, centros);
         i = 0;
-        // @todo criar uma classe Grupo com vários hashmap
-        // 
-        Wine[][] grupos = new Wine[K][(int)NUMERO_INSTANCIAS / K];
-        while(i < LOOP_MAX){
+        int centro;
+        
+        while(i < LOOP_MAX) {
             int j = 0;
             while(j < NUMERO_INSTANCIAS) {
-                int centro = WineFactory.descobreCentro(instancias[j], centros);
-                // 
-                //grupos[centro][] = instancias[j];
+                Wine instanciaAtual = instancias[j];
+                centro = grupos.seleciona(instanciaAtual);
+                grupos.addInstancia(instanciaAtual,centro);
+                j++;
             }
             
+            for(j=0; j < grupos.k; j++) {
+                Grupo  grupo = grupos.grupos[j];
+                Wine pseudo = grupos.geraPseudoInstanciaMedia(grupo);
+                centros[j] = grupos.instanciaMaisProxima(pseudo, grupo);
+                grupo.setCentro(centros[j]);
+            }
+            
+            i++;
+            break;
+            
         }
-        
+        System.out.println(grupos);
     }
     
 }   

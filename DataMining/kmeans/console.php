@@ -53,6 +53,9 @@ do{
     
     $inTheEnd = true;
     foreach($newCenters as $index => $newCenter){
+        if(!$newCenter){
+            var_dump($newCenters);
+        }
         if(spl_object_hash($newCenter) != spl_object_hash($centers[$index])){
             $centers = $newCenters;
             $inTheEnd = false;

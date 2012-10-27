@@ -1,11 +1,14 @@
 <?php
 
 function doGroup(Array $instances,$centers){
-    var_dump($instances);
+    
     $groups = array();
     foreach($instances as $instance){
         $min_distance = PHP_INT_MAX;
         $group_near = null; 
+        if(!$instance){
+            var_dump($instances);
+        }
         foreach($centers as $key_group => $center){
             $distance = $instance->distance_euclidian($center);
             if( $distance < $min_distance ){

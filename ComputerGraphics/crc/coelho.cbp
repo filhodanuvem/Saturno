@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="coelho" />
+		<Option title="coelhoCRC" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -15,10 +15,13 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
+					<Add option="-gl" />
 					<Add option="-glut" />
 					<Add option="-glu" />
-					<Add option="-gl" />
-					<Add option="-lglut" />
+					<Add option="-lglut32" />
+					<Add option="-lglu32" />
+					<Add option="-lopengl32" />
+					<Add library="C:/Program Files (x86)/CodeBlocks/MinGW/lib/glut32.lib" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -38,6 +41,16 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Linker>
+			<Add option="-glut" />
+			<Add option="-glu" />
+			<Add option="-gl" />
+			<Add library="/usr/lib/libglut.so.3" />
+		</Linker>
+		<Unit filename="geometria.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="geometria.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -49,6 +62,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="ply.h" />
+		<Unit filename="processadorVertices.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="processadorVertices.h" />
 		<Unit filename="rply.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -2,11 +2,8 @@
 // Um programa OpenGL que exemplifica a visualização
 // de malhas ply.
 
-#define GLUT_DISABLE_ATEXIT_HACK 1
 #include <GL/glut.h>
 #include <math.h>
-#include "geometria.h"
-#include "processadorVertices.h";
 
 #include"malha.h"
 
@@ -17,7 +14,6 @@ GLfloat olho [] = {0,0,0};
 GLfloat cima [] = {0,1,0};
 GLfloat angle_rot1 = 0, angle_rot2 = 0, angle_rot3 = 0;
 float xm = 0, ym = 0, zm = 0;
-
 int k, l, m, n;
 
 void Desenha();
@@ -31,150 +27,72 @@ void keyboard_callback_special(int key, int x, int y);
 // Função callback chamada para fazer o desenho
 void Desenha(void)
 {
+  int i;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	crcLoadIdentity(PROJECTIONMATRIX);
-	crcLoadIdentity(MODELMATRIX);
-	crcLoadIdentity(VIEWMATRIX);
 
-	crcPerspective(angle,fAspect,0.1,500);
+  // Especifica sistema de coordenadas de projeção
+   glMatrixMode(GL_PROJECTION);
+	// Inicializa sistema de coordenadas de projeção
+	glLoadIdentity();
 
-	vector3 vCentro;
-	crcInitializeV3(vCentro);
-	vector3 vCima;
-	crcInitializeV3(vCima);
-	vCima[0] = cima[0];
-	vCima[1] = cima[1];
-	vCima[2] = cima[2];
-	crcViewer(olho[0],olho[1],olho[2],vCentro, vCima);
+	// Especifica a projeção perspectiva
+	gluPerspective(angle,fAspect,0.1,500);
+
+	// Especifica sistema de coordenadas do modelo
+	glMatrixMode(GL_MODELVIEW);
+	// Inicializa sistema de coordenadas do modelo
+	glLoadIdentity();
+
+    // Especifica posição do observador e do alvo
+	gluLookAt(olho[0],olho[1],olho[2],0,0,0, cima[0],cima[1],cima[2]);
+
+
+
 
     /////////////////////////////////////////////////////////
     /////Mostra o coelhinho do Davi
+    glRotatef(angle_rot1, 1, 0, 0);
+    glRotatef(angle_rot2, 0, 1, 0);
+    glRotatef(angle_rot3, 0, 0, 1);
 
-    crcRotateX(MODELMATRIX, angle_rot1);
-    crcRotateY(MODELMATRIX, angle_rot2);
-    crcRotateZ(MODELMATRIX, angle_rot3);
-
-    crcTranslate(MODELMATRIX, -xm, -ym, -zm);
+    glPushMatrix();
+    glTranslatef(-xm, -ym, -zm);
 
     glColor3f(0,0,1);
     glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 
   //desenha a Bounding Box
-
-         vertex p1;
-         crcPrintV4(p1.coord);
-         crcCriaV4(p1.coord, minx, miny, minz);
-         crcPrintV4(p1.coord);
-         vertex p2;
-         crcCriaV4(p2.coord, maxx, miny, minz);
-         vertex p3;
-         crcCriaV4(p3.coord, maxx, maxy, minz);
-         vertex p4;
-         crcCriaV4(p4.coord, minx, maxy, minz);
-
-         vertex p5;
-         crcCriaV4(p5.coord, maxx, maxy, maxz);
-         vertex p6;
-         crcCriaV4(p6.coord, maxx, maxy, minz);
-         vertex p7;
-         crcCriaV4(p7.coord, maxx, miny, minz);
-         vertex p8;
-         crcCriaV4(p8.coord, maxx, miny, maxz);
-
-         vertex p9;
-         crcCriaV4(p9.coord, maxx, maxy, maxz);
-         vertex p10;
-         crcCriaV4(p10.coord, minx, maxy, maxz);
-         vertex p11;
-         crcCriaV4(p11.coord, minx, maxy, minz);
-         vertex p12;
-         crcCriaV4(p12.coord, maxx, maxy, minz);
-
-         vertex p13;
-         crcCriaV4(p13.coord, minx, miny, minz);
-         vertex p14;
-         crcCriaV4(p14.coord, maxx, miny, minz);
-         vertex p15;
-         crcCriaV4(p15.coord, maxx, miny, maxz);
-         vertex p16;
-         crcCriaV4(p16.coord, minx, miny, maxz);
-
-         vertex p17;
-         crcCriaV4(p17.coord, maxx, maxy, maxz);
-         vertex p18;
-         crcCriaV4(p18.coord, minx, maxy, maxz);
-         vertex p19;
-         crcCriaV4(p19.coord, minx, miny, maxz);
-         vertex p20;
-         crcCriaV4(p20.coord, maxx, miny, maxz);
-
-         vertex p21;
-         crcCriaV4(p21.coord, minx, miny, minz);
-         vertex p22;
-         crcCriaV4(p22.coord, minx, miny, maxz);
-         vertex p23;
-         crcCriaV4(p23.coord, minx, maxy, maxz);
-         vertex p24;
-         crcCriaV4(p24.coord, minx, maxy, minz);
-
-
-         crcPushVertex(&p1);
-         crcPrintV4(p1.coord);
-         crcPushVertex(&p2);
-         crcPushVertex(&p3);
-         crcPushVertex(&p4);
-         crcPushVertex(&p5);
-         crcPushVertex(&p6);
-         crcPushVertex(&p7);
-         crcPushVertex(&p8);
-         crcPushVertex(&p9);
-         crcPushVertex(&p10);
-         crcPushVertex(&p11);
-         crcPushVertex(&p12);
-         crcPushVertex(&p13);
-         crcPushVertex(&p14);
-         crcPushVertex(&p15);
-         crcPushVertex(&p16);
-         crcPushVertex(&p17);
-         crcPushVertex(&p18);
-         crcPushVertex(&p19);
-         crcPushVertex(&p20);
-         crcPushVertex(&p21);
-         crcPushVertex(&p22);
-         crcPushVertex(&p23);
-        // crcPrintV4(p7.coord);
-         crcPushVertex(&p24);
-        //crcPrintV4(p7.coord);
-
 	glBegin(GL_QUADS);
+         glVertex3f(minx, miny, minz);
+         glVertex3f(maxx, miny, minz);
+         glVertex3f(maxx, maxy, minz);
+         glVertex3f(minx, maxy, minz);
 
-         crcCriaGlVertexV3(p1.coord);
-         crcCriaGlVertexV3(p2.coord);
-         crcCriaGlVertexV3(p3.coord);
-         crcCriaGlVertexV3(p4.coord);
-         crcCriaGlVertexV3(p5.coord);
-         crcCriaGlVertexV3(p6.coord);
-         crcCriaGlVertexV3(p7.coord);
-         crcCriaGlVertexV3(p8.coord);
-         crcCriaGlVertexV3(p9.coord);
-         crcCriaGlVertexV3(p10.coord);
-         crcCriaGlVertexV3(p11.coord);
-         crcCriaGlVertexV3(p12.coord);
-         crcCriaGlVertexV3(p13.coord);
-         crcCriaGlVertexV3(p14.coord);
-         crcCriaGlVertexV3(p15.coord);
-         crcCriaGlVertexV3(p16.coord);
-         crcCriaGlVertexV3(p17.coord);
-         crcCriaGlVertexV3(p18.coord);
-         crcCriaGlVertexV3(p19.coord);
-         crcCriaGlVertexV3(p20.coord);
-         crcCriaGlVertexV3(p21.coord);
-         crcCriaGlVertexV3(p22.coord);
-         crcCriaGlVertexV3(p23.coord);
-         crcCriaGlVertexV3(p24.coord);
+         glVertex3f(maxx, maxy, maxz);
+         glVertex3f(maxx, maxy, minz);
+         glVertex3f(maxx, miny, minz);
+         glVertex3f(maxx, miny, maxz);
 
+         glVertex3f(maxx, maxy, maxz);
+         glVertex3f(minx, maxy, maxz);
+         glVertex3f(minx, maxy, minz);
+         glVertex3f(maxx, maxy, minz);
 
+         glVertex3f(minx, miny, minz);
+         glVertex3f(maxx, miny, minz);
+         glVertex3f(maxx, miny, maxz);
+         glVertex3f(minx, miny, maxz);
+
+         glVertex3f(maxx, maxy, maxz);
+         glVertex3f(minx, maxy, maxz);
+         glVertex3f(minx, miny, maxz);
+         glVertex3f(maxx, miny, maxz);
+
+         glVertex3f(minx, miny, minz);
+         glVertex3f(minx, miny, maxz);
+         glVertex3f(minx, maxy, maxz);
+         glVertex3f(minx, maxy, minz);
 
 	glEnd();
 
@@ -187,24 +105,20 @@ void Desenha(void)
       HE_EDGE* e = triangulos[t].edge;
       do {
           glColor3f((-minx+e->vert->x)/(maxx-minx), (-miny+e->vert->y)/(maxy-miny), (minz+e->vert->z)/(maxz-minz));
-          vertex pe;
-          crcInitializeV4(pe.coord);
-          crcCriaV4(pe.coord, e->vert->x, e->vert->y, e->vert->z);
-          crcCriaGlVertexV4(pe.coord);
-          //printf("vamu lá");
+          glVertex3f(e->vert->x, e->vert->y, e->vert->z);
           /*
           glColor3f((-minx+edge->vert->x)/(maxx-minx), (-miny+edge->vert->y)/(maxy-miny), (minz+edge->vert->z)/(maxz-minz));
-          crcCriaV4(p1.coord, edge->vert->x, edge->vert->y, edge->vert->z);
+          glVertex3f(edge->vert->x, edge->vert->y, edge->vert->z);
 
           glColor3f((-minx+vert[triangulos[t].v2].x)/(maxx-minx), (-miny+vert[triangulos[t].v2].y)/(maxy-miny), (vert[triangulos[t].v2].z-minz)/(maxz-minz));
-          crcCriaV4(p1.coord, vert[triangulos[t].v2].x, vert[triangulos[t].v2].y, vert[triangulos[t].v2].z);
+          glVertex3f(vert[triangulos[t].v2].x, vert[triangulos[t].v2].y, vert[triangulos[t].v2].z);
           */
           e = e->next;
         } while (e != triangulos[t].edge);
     }
   }
   glEnd();
-   // glPopMatrix();
+    glPopMatrix();
 
 
 
@@ -215,28 +129,16 @@ void Desenha(void)
 
     glBegin(GL_LINES);
       glColor3f(1,0,0);
-      vertex l1;
-      crcCriaV4(l1.coord, 0,0,0);
-      crcCriaGlVertexV4(l1.coord);
-      vertex l2;
-      crcCriaV4(l2.coord, maxx - xm,0,0);
-      crcCriaGlVertexV4(l2.coord);
+      glVertex3f(0,0,0);
+      glVertex3f(maxx - xm,0,0);
 
       glColor3f(0,1,0);
-      vertex l3;
-      crcCriaV4(p3.coord, 0,0,0);
-      crcCriaGlVertexV4(l3.coord);
-      vertex l4;
-      crcCriaV4(p4.coord, 0,maxy - ym,0);
-      crcCriaGlVertexV4(l4.coord);
+      glVertex3f(0,0,0);
+      glVertex3f(0,maxy - ym,0);
 
       glColor3f(0,0,1);
-      vertex l5;
-      crcCriaV4(p5.coord, 0,0,0);
-      crcCriaGlVertexV4(l5.coord);
-      vertex l6;
-      crcCriaV4(p6.coord, 0,0,maxz - zm);
-      crcCriaGlVertexV4(l6.coord);
+      glVertex3f(0,0,0);
+      glVertex3f(0,0,maxz - zm);
    glEnd();
    ////////////////////////////////////////////////////////////////
 
@@ -378,7 +280,7 @@ int main(int argv, char** argc)
   int i;
   if (argv == 1) argc[1]="bunny.ply";
   CarregaMalhaPLY(argc);
-    glutInit(&argv,argc);
+
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
 	glutInitWindowSize(800,600);
 	glutCreateWindow("Visualizacao de Malhas PLY");

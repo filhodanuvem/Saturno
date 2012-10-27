@@ -1,4 +1,4 @@
-package kmeansjava;
+package br.cloud.dataming.kmeansjava;
 
 /**
  *
@@ -93,5 +93,50 @@ public class Wine
                 break;
               
         }
+    }
+    
+    public double get(int i)
+    {
+        
+        switch(i){
+            case 0:
+                return this.alcalinity_ash;
+                
+            case 1:
+                return this.alcohol;
+                
+            case 2:
+                return this.ash;
+                
+            case 3:
+                return this.color_intensity;
+                
+            case 4:
+                return this.diluted_wines;
+                
+            case 5:
+                return this.flavanoids;
+                
+            case 6:
+                return this.hue;
+                
+            case 7:
+                return this.magnesium;
+                
+            case 8:
+                return this.malic_acid;
+
+            case 9:
+                return this.nonflavanoid_phenols;
+
+            case 10:
+                return this.proline;
+
+            case 11:
+                return this.total_phenols;
+                
+              
+        }
+        return 0;
     }
 }

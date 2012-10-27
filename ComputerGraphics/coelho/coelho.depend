@@ -1,103 +1,25 @@
 # depslib dependency file v1.0
-1165373444 source:c:\users\cloud\documents\cg\coelho\malha.c
-	<stdio.h>
-	"rply.h"
-	<math.h>
-	"malha.h"
-
-1338509960 
-
-1105822104 c:\users\cloud\documents\cg\coelho\rply.h
-
-1165518456 c:\users\cloud\documents\cg\coelho\malha.h
-	<stdio.h>
-	"rply.h"
-	<math.h>
-
-1163598970 source:c:\users\cloud\documents\cg\coelho\ply.c
-
-1105822104 source:c:\users\cloud\documents\cg\coelho\rply.c
-	<stdio.h>
-	<ctype.h>
-	<assert.h>
-	<string.h>
-	<limits.h>
-	<float.h>
-	<stdarg.h>
-	<stdlib.h>
-	<stddef.h>
-	"rply.h"
-
-1338507960 source:c:\users\cloud\documents\cg\coelho\main.c
-	<windows.h>
-	<gl/glut.h>
-	<math.h>
-	"geometria.h"
-	"processadorVertices.h"
-	"malha.h"
-
-1338509945 source:c:\users\cloud\documents\cg\coelho\processadorvertices.c
-	"processadorVertices.h"
-	<stdio.h>
-	<stdlib.h>
-	<math.h>
-
-1338500717 c:\users\cloud\documents\cg\coelho\processadorvertices.h
-	"geometria.h"
-
-1338500717 .h"
-
-1338502717 c:\users\cloud\documents\cg\coelho\geometria.h
-
-1338509960 source:c:\users\cloud\documents\cg\coelho\geometria.c
-	"geometria.h"
-	<stdio.h>
-	<stdlib.h>
-	<windows.h>
-	<gl/glut.h>
-	<math.h>
-
-1348925126 source:/var/www/Saturno/GC/coelho/geometria.c
-	"geometria.h"
-	<stdio.h>
-	<stdlib.h>
+1348927866 source:/var/www/Saturno/ComputerGraphics/coelho/main.c
 	<GL/glut.h>
 	<math.h>
-
-1338502717 /var/www/Saturno/GC/coelho/geometria.h
-
-1348925135 source:/var/www/Saturno/GC/coelho/main.c
-	<GL/glut.h>
-	<math.h>
-	"geometria.h"
-	"processadorVertices.h"
 	"malha.h"
 
-1338500717 /var/www/Saturno/GC/coelho/processadorVertices.h
-	"geometria.h"
-
-1165518456 /var/www/Saturno/GC/coelho/malha.h
+1165518456 /var/www/Saturno/ComputerGraphics/coelho/malha.h
 	<stdio.h>
 	"rply.h"
 	<math.h>
 
-1105822104 /var/www/Saturno/GC/coelho/rply.h
+1105822104 /var/www/Saturno/ComputerGraphics/coelho/rply.h
 
-1165373444 source:/var/www/Saturno/GC/coelho/malha.c
+1165373444 source:/var/www/Saturno/ComputerGraphics/coelho/malha.c
 	<stdio.h>
 	"rply.h"
 	<math.h>
 	"malha.h"
 
-1163598970 source:/var/www/Saturno/GC/coelho/ply.c
+1163598970 source:/var/www/Saturno/ComputerGraphics/coelho/ply.c
 
-1338509945 source:/var/www/Saturno/GC/coelho/processadorVertices.c
-	"processadorVertices.h"
-	<stdio.h>
-	<stdlib.h>
-	<math.h>
-
-1105822104 source:/var/www/Saturno/GC/coelho/rply.c
+1105822104 source:/var/www/Saturno/ComputerGraphics/coelho/rply.c
 	<stdio.h>
 	<ctype.h>
 	<assert.h>

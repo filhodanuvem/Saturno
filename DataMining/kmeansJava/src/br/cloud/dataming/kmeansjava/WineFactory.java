@@ -2,7 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package kmeansjava;
+package br.cloud.dataming.kmeansjava;
+
+import br.cloud.dataming.kmeansjava.Wine;
+import br.cloud.dataming.kmeansjava.KmeansJava;
 
 /**
  *
@@ -21,20 +24,6 @@ public class WineFactory
         
         return wine;
     }        
-        
-    public static int descobreCentro(Wine wine,Wine[] centros)
-    {
-        int i = 0, centro = 0;
-        double distancia = 0,menorDistancia = Double.MAX_VALUE; 
-        while(i < KmeansJava.K){
-            distancia = wine.distance_euclidian(centros[i]);
-            if(distancia < menorDistancia){
-                centro = i;
-                menorDistancia = distancia;
-            }
-        }
-        
-        return centro;
-    }
+    
     
 }
