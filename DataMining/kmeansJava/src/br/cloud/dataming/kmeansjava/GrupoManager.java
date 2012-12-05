@@ -28,6 +28,7 @@ public class GrupoManager {
         if(this.k <= id){
             throw new IllegalArgumentException("Grupo inexistente");
         }
+        instancia.found_class = id + 1;
         
         if(!this.grupos[id].contains(instancia)){
             this.grupos[id].add(instancia);
@@ -112,10 +113,14 @@ public class GrupoManager {
         int tamanhoGrupo = grupo.size();
         for(int i= 0; i< tamanhoGrupo; i++) {
             Wine atual = grupo.get(i);
-            for(int a=0; a< 12; a++){
+            for(int a=0; a< 13; a++){
                double valor = atual.get(a);
                instancia.set(a, instancia.get(a) + valor);
             }   
+        }
+        
+        for(int i= 0; i< 13; i++) {
+            instancia.set(i, instancia.get(i)/grupo.size());
         }
         return instancia;
     }
@@ -134,29 +139,39 @@ public class GrupoManager {
             contadores_classes[atual.real_class - 1]++;
             i++;
         }
-        i=0;
         
+        i=0;
         // imprimo o numero de instancias que o grupo X esperava 
         while(i < this.k) {
             System.out.println("Grupo "+(i+1)+" esperava "+contadores_classes[i++]);
         }
+        i=0;
+        while(i < this.k) {
+            contadores_classes[i] =0;
+            i++;
+        }
         System.out.println("");
         i = 0;
+        int numAcertos = 0;
         while(i < this.k) {
             int j = 0;
             while(j < this.grupos[i].size()) {
                 Wine instancia = this.grupos[i].get(j);
-                
                 System.out.println(instancia);
+                if(instancia.real_class == instancia.found_class){
+                   // System.out.println(instancia.real_class+","+instancia.found_class);
+                    numAcertos++;
+                }
                 j++;
             }
             i++;
         }
         
+        float percentagem = (100*numAcertos)/KmeansJava.NUMERO_INSTANCIAS;          
+        System.out.println("Acerto :"+(percentagem)+" % , Falha: "+(100 - percentagem)+" %");
     }
     
     protected void ordenaGrupos(){
-        Grupo[] novoGrupos =null;
         for(int i=0; i<this.k;i++ ){
             Grupo fixo = this.grupos[i];
             for(int j=0; j<this.k; j++){

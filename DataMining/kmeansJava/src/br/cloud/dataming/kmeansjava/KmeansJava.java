@@ -1,11 +1,9 @@
 package br.cloud.dataming.kmeansjava;
 
-import java.util.HashMap;
-
 /**
  *
- * @author Adriele 
- * @author Claudson 
+ * @author Adriele Alvarenga
+ * @author Claudson Oliveira
  */
 public class KmeansJava {
     

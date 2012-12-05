@@ -21,6 +21,7 @@ public class Wine
     public double proline;
     
     public int real_class;
+    public int found_class;
     
     public double distance_euclidian(Wine center)
     {
@@ -152,6 +153,9 @@ public class Wine
             case 13:
                 return this.real_class;
                 
+            case 14:
+                return this.found_class;
+                
               
         }
         return 0;
@@ -160,12 +164,11 @@ public class Wine
     @Override
     public String toString() {
         String texto = "[";
-        for(int i=0; i<= 13; i++){
+        for(int i=0; i<= 14; i++){
             texto += this.get(i)+", ";
         }
         texto += "]";
         return texto;
     }
-    
     
 }

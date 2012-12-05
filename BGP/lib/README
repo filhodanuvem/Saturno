@@ -1,0 +1,21 @@
+informações úteis 
+
+----------------------------------------------------------------------------
+----------- Trabalho de teoria dos grafos - Claudson Oliveira --------------
+---------------------------------- 200822007 -------------------------------
+----------------------------------------------------------------------------
+
+1) Dependencias 
+
+Ruby 
+apt-get install  ruby1.8
+
+ruby-gnome2
+apt-get install ruby-gnome2 // É possível rodar os algoritmos sem plotar os gráficos na tela
+
+3) Rodando
+
+ruby1.8 ./arquivo_que_quiser_rodar.rb
+Os arquivos que começam com underscore são exemples de manipualação dos objetos e do grafo em si.
+
+

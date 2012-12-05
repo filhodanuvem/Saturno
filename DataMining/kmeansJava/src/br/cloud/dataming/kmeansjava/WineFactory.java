@@ -4,9 +4,6 @@
  */
 package br.cloud.dataming.kmeansjava;
 
-import br.cloud.dataming.kmeansjava.Wine;
-import br.cloud.dataming.kmeansjava.KmeansJava;
-
 /**
  *
  * @author cloud
