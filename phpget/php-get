@@ -1,0 +1,83 @@
+#!/bin/bash
+
+help()
+{
+    echo "help! I need somebody, help!"
+    exit 1
+}
+ 
+# php-get install 5.5.0 /destiny
+if [ $# -lt 2 ];
+then
+    help
+fi
+
+path=$3
+if [ $# -lt 3 ];
+then
+    path=$PWD
+fi
+echo $path
+
+# bellow we'll split the version php in parts, how 5.5.0 is 5 , 5 and 0
+oIFS=$IFS
+IFS='.'
+version=($2)
+IFS=$oIFS
+
+mirror="http://php.net/get/php-$2.tar.gz/from/br1.php.net/mirror"
+if [  ${version[0]} -le 5  ];
+then 
+   if  [ ${version[0]} -lt 5 ] ;
+   then
+       mirror="http://museum.php.net/php${version[0]}/php-$2.tar.gz" 
+   elif [ ${version[1]} -le 3 ] ;
+   then
+       if [ ${version[1]} -eq 3 -a ${version[2]} -lt 6 ];
+       then
+           mirror="http://museum.php.net/php${version[0]}/php-$2.tar.gz"
+       elif [ ${version[1]} -lt 3 ]; 
+       then 
+		   mirror="http://museum.php.net/php${version[0]}/php-$2.tar.gz"	
+       fi
+   fi
+fi 
+
+filename="php-$2"
+filename_tgz="$filename.tar.gz"
+echo "Downloading php version $2 by $mirror"
+if `wget -O $path/$filename_tgz $mirror`;
+then
+echo;
+else
+echo "Repository $mirror not found"
+   echo $?
+fi
+
+tar -vzxf "$path/$filename_tgz"
+cd "$path/$filename"
+make clean
+rm -rf configure
+    ./vcsclean
+    ./buildconf --force
+     OPTIONS="--with-gd --with-jpeg-dir=/usr --with-xpm-dir=/usr --with-freetype-dir=/usr \
+--with-mysql=/usr --enable-bcmath --with-gmp --with-readline \
+--with-openssl --with-curl --without-esmtp \
+--with-mysqli --enable-pcntl \
+--enable-memory-limit --with-mcrypt --with-t1lib \
+--enable-debug --with-iconv --enable-wddx --with-pdo-pgsql \
+--enable-spl --enable-pdo --with-pdo-mysql --with-pdo-sqlite \
+--with-ctype --with-bz2 --enable-mbstring --with-mime-magic \
+--with-xmlrpc --with-zlib --disable-zend-memory-manager --with-esmtp \
+--with-xsl --enable-exif --enable-soap --enable-ftp"
+echo "configurando php para /usr/local/php/$2"
+./configure --prefix="$path/$filename/" ${OPTIONS}
+
+if [ $1="test" -o $1="install" ]
+then
+   make test
+   
+ln -s ./sapi/cli/php ./php$2
+echo "You are rock! And You have a ./php$2 "
+fi
+
