@@ -16,20 +16,27 @@ use Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine;
  * Classes that extends this represents some dataTable and can print
  * a template with that entity
  */
-abstract class Table
+abstract class Table implements \Saturno\DataTablesBundle\Interfaces\Table
 {
-    private $_templateEngine;
+    private $templateEngine;
 
-    protected $_template;
+    protected $template;
 
-    protected $_columns;
+    protected $javascript;
+
+    protected $columns;
+
+    protected $body;
 
     public abstract function configure();
 
-    public function __construct(\Twig_TemplateInterface $template)
+    public function __construct(\Twig_Environment $template)
     {
-        $this->_templateEngine = $template;
-        $this->_columns  = array();
+        $this->templateEngine = $template;
+        $this->template   = 'SaturnoDataTablesBundle:Skeleton:table.html.twig';
+        $this->javascript = 'SaturnoDataTablesBundle:Skeleton:javascript.html.twig';
+        $this->body     = new Body($this);
+        $this->columns  = array();
         $this->configure();
     }
 
@@ -42,7 +49,7 @@ abstract class Table
     public function addColumn($property, $label, Array $settings = array())
     {
         $column = new Column($property, $label, $settings);
-        $this->_columns[$property] = $column;
+        $this->columns[$property] = $column;
 
         return $this;
     }
@@ -52,9 +59,7 @@ abstract class Table
      */
     public function getColumns()
     {
-        return array_map(function($column){
-            return $column->getLabel();
-        }, $this->_columns);
+        return $this->columns;
     }
 
     /**
@@ -65,11 +70,34 @@ abstract class Table
         if (!is_string($template)) {
             throw new \InvalidArgumentException('Expected a template string name');
         }
-        $this->_template = $template;
+        $this->template = $template;
+
+        return $this;
     }
 
     /**
-     * @param int $index
+     * @param array $content
+     * @return Table
+     */
+    public function setBody(Array $content)
+    {
+        foreach ($content as $entity) {
+            $this->body->addRow($entity);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getBody()
+    {
+        return $this->body->getRows();
+    }
+
+    /**
+     * @param mixed $index
      * @return string
      * @throws \OutOfBoundsException
      * @throws \InvalidArgumentException
@@ -80,12 +108,56 @@ abstract class Table
             throw new \InvalidArgumentException('Expected a valid index');
         }
 
-        if ($index >= count($this->_columns)) {
-            $total = count($this->_columns);
+        if ($index >= count($this->columns)) {
+            $total = count($this->columns);
             throw new \OutOfBoundsException("Trying access column {$index} of {$total} ");
         }
-        $values = array_values($this->_columns);
+        $values = array_values($this->columns);
 
         return $values[$index]->getName();
     }
+
+    /**
+     * @return mixed
+     */
+    private function getName()
+    {
+        $reflect = new \ReflectionClass($this);
+        return str_replace('Table','',$reflect->getShortName());
+    }
+
+    /**
+     * @return array
+     */
+    private function getSettings()
+    {
+        return array(
+            'name' => $this->getName(),
+            'columns' => $this->columns,
+            'body' => $this->body,
+            'config'  => array(
+
+            )
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function createView()
+    {
+        $vars = $this->getSettings();
+        return $this->templateEngine->render($this->template, $vars);
+    }
+
+    /**
+     * @return string
+     */
+    public function createJavascript()
+    {
+        $vars = $this->getSettings();
+        return $this->templateEngine->render($this->javascript, $vars);
+    }
+
+
 }

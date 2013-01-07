@@ -14,7 +14,7 @@ namespace Saturno\DataTablesBundle\HTTP;
 use Symfony\Component\HttpFoundation\Request;
 use Saturno\DataTablesBundle\Element\Table;
 
-class GridRequest
+class GridRequest implements \Saturno\DataTablesBundle\Interfaces\GridRequest
 {
     /**
      * @var Table $table origin of the request
@@ -29,15 +29,16 @@ class GridRequest
     {
         $this->table = $origin;
         $this->variables  = array(
-            'limit' => self::LIMIT_DEFAULT,
-            'orderBy' => null,
-            'like' => null,
-            'search' => null,
-            'offset' => 0,
+            'limit'    => self::LIMIT_DEFAULT,
+            'orderBy'  => null,
+            'orderDir' => 'desc',
+            'like'     => null,
+            'search'   => null,
+            'offset'   => 0,
         );
     }
 
-    private function format(Request $request)
+    public function format(Request $request)
     {
        $requestArray = array_merge($request->query->all(), $request->request->all());
 
@@ -48,20 +49,38 @@ class GridRequest
 
     }
 
+    /**
+     * @todo to give support the many orderning using iSortCol_0, iSortCol_1...
+     * @param string $key
+     * @param string $value
+     * @return array
+     */
     private function converter($key, $value)
     {
         if ($key == 'iDisplayLength' && $value >= 0 ) {
-           return array('limit', $value);
+            return array('limit', $value);
         }
 
         if ($key == 'iDisplayStart'  && $value >= 0 ) {
-           return array('offset', $value);
+            return array('offset', $value);
         }
 
-        if (array_key_exists('iSortCol_0', $request)) {
-//            $campos = array_keys($colunas);
-//            $requestFormatada['orderBy'] = $campos[$request['iSortCol_0']];
+        if ($key == 'sSortDir_0' && $value) {
+            return array('orderDir',$value);
         }
+
+        if ($key == 'sSearch' && $value) {
+            return array('like', $value);
+        }
+
+        if ($key == 'iSortCol_0' && $value) {
+            return array(
+                'orderBy',
+                $this->table->getColumnName($value)
+            );
+        }
+
+
     }
 
     public function all()

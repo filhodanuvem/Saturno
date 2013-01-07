@@ -11,7 +11,7 @@
 
 namespace Saturno\DataTablesBundle\Tests\Element;
 
-
+use Saturno\DataTablesBundle\Element\Column;
 
 class TableTest extends \PHPUnit_Framework_testCase
 {
@@ -23,7 +23,7 @@ class TableTest extends \PHPUnit_Framework_testCase
     {
         $table = $this->getTable();
         $table->addColumn($property, $label, $config);
-        $this->assertSame($expected, $table->getColumns(), 'GetColumns is failed');
+        $this->assertEquals($expected, $table->getColumns(), 'GetColumns is failed');
     }
 
     /**
@@ -33,20 +33,42 @@ class TableTest extends \PHPUnit_Framework_testCase
      */
     public function testIndexesAsNamesInColumns($index, $expected)
     {
-        $template  = $this->getMockForAbstractClass('\Twig_TemplateInterface');
-        $table = new UserTable($template);
+        $template  = $this->getMockForAbstractClass('\Twig_Environment');
+        $table = new \Saturno\DataTablesBundle\Tests\Fixtures\UserTable($template);
 
         $this->assertEquals($expected, $table->getColumnName($index));
 
     }
 
+    public function testIfSetBodyReturnsCorrectContent()
+    {
+        $user1 = new \Saturno\DataTablesBundle\Tests\Fixtures\User(1,'Joseph','2013-05-23');
+        $user2 = new \Saturno\DataTablesBundle\Tests\Fixtures\User(2,'Hellena','1988-06-27');
 
+        $expected = array(
+            array(1,'Joseph','2013-05-23'),
+            array(2,'Hellena','1988-06-27')
+        );
+
+        $template  = $this->getMockForAbstractClass('\Twig_Environment');
+        $table = new \Saturno\DataTablesBundle\Tests\Fixtures\UserTable($template);
+        $table->setBody(array(
+            $user1,
+            $user2,
+        ));
+
+        $this->assertEquals($expected, $table->getBody());
+    }
+
+    // @todo to test columns extras that does linked to entities
+
+    // providers
     public function providerCorrectAddColumns()
     {
-        return array(
-            array('foo','Bar',array(),array('foo' => 'Bar')),
-            array('Claudson','Cloudson', array('anything' => new \stdClass), array('Claudson' => 'Cloudson')),
 
+        return array(
+            array('foo','Bar',array(), array('foo' => new Column('foo','Bar'))),
+            array('Claudson','Cloudson', array('anything' => new \stdClass), array('Claudson'=>new Column('Claudson','Cloudson',array('anything' => new \stdClass))))
         );
     }
 
@@ -58,26 +80,15 @@ class TableTest extends \PHPUnit_Framework_testCase
         );
     }
 
+    // getting mock
     public function getTable()
     {
-        $template  = $this->getMockForAbstractClass('\Twig_TemplateInterface');
+        $template  = $this->getMockForAbstractClass('\Twig_Environment');
         /* @var $table \Saturno\DataTablesBundle\Element\Table */
         $table = $this->getMockBuilder('Saturno\DataTablesBundle\Element\Table')
              ->setConstructorArgs( array($template))
              ->getMockForAbstractClass();
 
         return $table;
-    }
-}
-
-
-// example of table
-Class UserTable extends \Saturno\DataTablesBundle\Element\Table
-{
-    public function configure()
-    {
-        $this->addColumn('id','Code')
-              ->addColumn('name','Name' )
-              ->addColumn('date','Birthday');
     }
 }
