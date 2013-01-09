@@ -4,6 +4,6 @@ services:
         arguments: [@twig]
     filter_render:
         class: Saturno\DataTablesBundle\Twig\TableExtension
-        arguments: [@twig]
+        arguments: [@kernel, @twig]
         tags:
           - {name: twig.extension}

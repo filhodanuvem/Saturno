@@ -10,22 +10,24 @@ class TableFactory
 {
     protected  $templateEngine;
 
-    protected $em;
+    protected $kernel;
 
-    public function __construct(\Twig_Environment $template, \Doctrine\ORM\EntityManager $em)
+    public function __construct(\Twig_Environment $template,\Symfony\Component\HttpKernel\Kernel $kernel)
     {
         $this->templateEngine = $template;
 
-        $this->em = $em;
+        $this->kernel = $kernel;
     }
 
     public function getTable($table)
     {
+        $tableClass = $this->getTableClassName($table);
 
+        return new $tableClass($this->templateEngine);
     }
 
 
-    private function convertToClassName($identifier)
+    private function getTableClassName($identifier)
     {
         if (strstr($identifier, ':') === false) {
             throw new \UnexpectedValueException('Identifiers needs to be the form PathToBundle:NameWithoutTable');
@@ -33,6 +35,16 @@ class TableFactory
 
         list($bundle,$table) = explode(':',$identifier);
         $table .= 'Table';
+
+        $bundles = $this->kernel->getBundles();
+        if (!array_key_exists($bundle, $bundles)) {
+            throw new \UnexpectedValueException("Bundle {$bundle} does not exist");
+        }
+
+        $selectedBundle =  $bundles[$bundle];
+        $selectedBundle =  mb_substr($selectedBundle,0, strrpos($selectedBundle, '\\'));
+
+        return $selectedBundle.'\\Table\\'.$table;
 
     }
 }

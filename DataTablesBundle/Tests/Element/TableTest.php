@@ -16,6 +16,46 @@ use Saturno\DataTablesBundle\Element\Column;
 class TableTest extends \PHPUnit_Framework_testCase
 {
 
+    public function testGetTableName()
+    {
+        $template = $this->getMock('\Twig_Environment');
+        $table = new \Saturno\DataTablesBundle\Tests\Fixtures\UserTable($template);
+        $reflect = new \ReflectionClass($table);
+        $method = $reflect->getMethod('getName');
+        $method->setAccessible(true);
+
+        $expected = 'User';
+
+        $this->assertEquals($expected, $method->invoke($table));
+    }
+
+
+    public function testLabelsOfTable()
+    {
+        $template = $this->getMock('\Twig_Environment');
+        $table = new \Saturno\DataTablesBundle\Tests\Fixtures\UserTable($template);
+        $columns = array_values($table->getColumns());
+        $column = $columns[0];
+
+        $expected = 'Code';
+
+        $this->assertEquals($expected, $column->getLabel());
+
+    }
+
+    public function testLabelsOfTableWithToString()
+    {
+        $template = $this->getMock('\Twig_Environment');
+        $table = new \Saturno\DataTablesBundle\Tests\Fixtures\UserTable($template);
+        $columns = array_values($table->getColumns());
+        $column = $columns[0];
+
+        $expected = 'Code';
+
+        $this->assertEquals($expected, $column);
+
+    }
+
     /**
      * @dataProvider providerCorrectAddColumns
      */

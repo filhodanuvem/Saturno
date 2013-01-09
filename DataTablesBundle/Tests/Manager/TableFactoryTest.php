@@ -18,12 +18,25 @@ class TableFactoryTest extends \PHPUnit_Framework_TestCase
      * @param string $identifier
      * @param string $namespace
      */
-    public function testConvertIdentifierToTableName($identifier, $namespace)
+    public function testConvertIdentifierToTableName($bundleName, $bundleNamespace, $identifier, $namespace)
     {
+
         $template = $this->getMock('\Twig_Environment');
-        $factory = new \Saturno\DataTablesBundle\Manager\TableFactory($template);
+        $kernel = $this->getMockBuilder('Symfony\Component\HttpKernel\Kernel', array('getBundles'))
+                       ->setConstructorArgs(array(
+                            'dev', true
+                        ))
+                        ->getMock();
+        $kernel->expects($this->once())
+               ->method('getBundles')
+               ->will($this->returnValue(array(
+                    $bundleName => $bundleNamespace
+                )));
+
+        $factory = new \Saturno\DataTablesBundle\Manager\TableFactory($template, $kernel);
         $reflection = new \ReflectionClass($factory);
-        $method = $reflection->getMethod('convertToClassName');
+        $method = $reflection->getMethod('getTableClassName');
+        $method->setAccessible(true);
 
         $this->assertEquals($namespace, $method->invoke($factory, $identifier));
     }
@@ -31,8 +44,9 @@ class TableFactoryTest extends \PHPUnit_Framework_TestCase
     public function providerIdentifiersAndTableNames()
     {
         return array(
-            array('AcmeFooBundle:Bar','Acme\FooBundle\Table\BarTable'),
-            array('SaturnoAcmeFooBundle:Bar','Saturno\Acme\FooBundle\Table\BarTable'),
+            array('AcmeFooBundle', 'Acme\FooBundle\AcmeFooBundle', 'AcmeFooBundle:Bar','Acme\FooBundle\Table\BarTable'),
+            array('SaturnoAcmeFooBundle', 'Saturno\Acme\FooBundle\SaturnoAcmeFooBundle', 'SaturnoAcmeFooBundle:Bar','Saturno\Acme\FooBundle\Table\BarTable'),
+            array('FooBarBazBrazilBundle', 'Foo\Bar\Baz\BrazilBundle\FooBarBazBrazilBundle', 'FooBarBazBrazilBundle:Cloud','Foo\Bar\Baz\BrazilBundle\Table\CloudTable'),
         );
     }
 }

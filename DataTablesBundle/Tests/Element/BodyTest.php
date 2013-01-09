@@ -16,6 +16,8 @@ use Saturno\DataTablesBundle\Tests\Fixtures\InvalidProduct;
 
 class BodyTest extends \PHPUnit_Framework_TestCase
 {
+
+
     public function testAddSimplesRows()
     {
         $user1 = new \Saturno\DataTablesBundle\Tests\Fixtures\User(1, 'Claudson Oliveira', '1990-05-28');
