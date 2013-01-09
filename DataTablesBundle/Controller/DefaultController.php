@@ -17,10 +17,11 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        var_dump(get_class($this->get('kernel')));
-        $table = new \Saturno\DataTablesBundle\Tests\Fixtures\UserTable($this->get('twig'));
-        $user1 = new \Saturno\DataTablesBundle\Tests\Fixtures\User(1,'Joseph','2013-05-23');
-        $user2 = new \Saturno\DataTablesBundle\Tests\Fixtures\User(2,'Hellena','1988-06-27');
+
+        $factory = $this->get('saturno_datatables_factory');
+        $table = $factory->getTable('AcmeDemoBundle:User');
+        $user1 = new \Acme\DemoBundle\Entity\User(1,'Joseph','2013-05-23');
+        $user2 = new \Acme\DemoBundle\Entity\User(2,'Hellena','1988-06-27');
 
         $table->setBody(array(
             $user1,

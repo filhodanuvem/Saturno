@@ -15,7 +15,6 @@ class TableFactory
     public function __construct(\Twig_Environment $template,\Symfony\Component\HttpKernel\Kernel $kernel)
     {
         $this->templateEngine = $template;
-
         $this->kernel = $kernel;
     }
 
@@ -42,7 +41,7 @@ class TableFactory
         }
 
         $selectedBundle =  $bundles[$bundle];
-        $selectedBundle =  mb_substr($selectedBundle,0, strrpos($selectedBundle, '\\'));
+        $selectedBundle =  mb_substr(get_class($selectedBundle),0, strrpos(get_class($selectedBundle), '\\'));
 
         return $selectedBundle.'\\Table\\'.$table;
 
