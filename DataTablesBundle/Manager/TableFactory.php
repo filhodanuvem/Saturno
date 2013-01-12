@@ -22,6 +22,10 @@ class TableFactory
     {
         $tableClass = $this->getTableClassName($table);
 
+        if (!class_exists($tableClass)) {
+            throw new TableNotFoundException("Class {$tableClass} not found ");
+        }
+
         return new $tableClass($this->templateEngine);
     }
 
@@ -29,7 +33,7 @@ class TableFactory
     private function getTableClassName($identifier)
     {
         if (strstr($identifier, ':') === false) {
-            throw new \UnexpectedValueException('Identifiers needs to be the form PathToBundle:NameWithoutTable');
+            throw new \InvalidArgumentException('Identifiers needs to be the form PathToBundle:NameWithoutTable');
         }
 
         list($bundle,$table) = explode(':',$identifier);
@@ -41,7 +45,11 @@ class TableFactory
         }
 
         $selectedBundle =  $bundles[$bundle];
-        $selectedBundle =  mb_substr(get_class($selectedBundle),0, strrpos(get_class($selectedBundle), '\\'));
+        if (is_object($selectedBundle)) {
+            $selectedBundle = get_class($selectedBundle);
+        }
+
+        $selectedBundle =  mb_substr($selectedBundle,0, strrpos($selectedBundle, '\\'));
 
         return $selectedBundle.'\\Table\\'.$table;
 

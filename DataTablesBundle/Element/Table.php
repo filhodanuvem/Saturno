@@ -16,7 +16,7 @@ use Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine;
  * Classes that extends this represents some dataTable and can print
  * a template with that entity
  */
-abstract class Table implements \Saturno\DataTablesBundle\Interfaces\Table
+abstract class Table implements \Saturno\Bridge\DataTables\Table
 {
     private $templateEngine;
 

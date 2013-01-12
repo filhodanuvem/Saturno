@@ -18,7 +18,7 @@ class BodyTest extends \PHPUnit_Framework_TestCase
 {
 
 
-    public function testAddSimplesRows()
+    public function test_add_simples_rows()
     {
         $user1 = new \Saturno\DataTablesBundle\Tests\Fixtures\User(1, 'Claudson Oliveira', '1990-05-28');
         $user2 = new \Saturno\DataTablesBundle\Tests\Fixtures\User(2, 'Jean Pimentel', '1988-08-25');
@@ -43,7 +43,7 @@ class BodyTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testAddRowsWithCompoundAttributes()
+    public function test_add_rows_with_compound_attributes()
     {
         $user1 = new \Saturno\DataTablesBundle\Tests\Fixtures\User(1,'Joseph','2013-05-23');
         $user2 = new \Saturno\DataTablesBundle\Tests\Fixtures\User(2,'Hellena','1988-06-27');
@@ -70,7 +70,7 @@ class BodyTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \UnexpectedValueException
      */
-    public function testAccessInvalidCompoundAttribute()
+    public function test_access_invalid_compound_attribute()
     {
         $user1 = new \Saturno\DataTablesBundle\Tests\Fixtures\User(1,'Joseph','2013-05-23');
         $user2 = new \Saturno\DataTablesBundle\Tests\Fixtures\User(2,'Hellena','1988-06-27');
@@ -97,7 +97,7 @@ class BodyTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \UnexpectedValueException
      */
-    public function testAccessInvalidCompoundAttributeWithNotObject()
+    public function test_access_invalid_compound_attribute_with_not_object()
     {
         $user1 = new \Saturno\DataTablesBundle\Tests\Fixtures\User(1,'Joseph','2013-05-23');
         $user2 = new \Saturno\DataTablesBundle\Tests\Fixtures\User(2,'Hellena','1988-06-27');

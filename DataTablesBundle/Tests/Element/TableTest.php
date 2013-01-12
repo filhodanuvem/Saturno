@@ -16,7 +16,7 @@ use Saturno\DataTablesBundle\Element\Column;
 class TableTest extends \PHPUnit_Framework_testCase
 {
 
-    public function testGetTableName()
+    public function test_get_table_name()
     {
         $template = $this->getMock('\Twig_Environment');
         $table = new \Saturno\DataTablesBundle\Tests\Fixtures\UserTable($template);
@@ -30,7 +30,7 @@ class TableTest extends \PHPUnit_Framework_testCase
     }
 
 
-    public function testLabelsOfTable()
+    public function test_labels_of_table()
     {
         $template = $this->getMock('\Twig_Environment');
         $table = new \Saturno\DataTablesBundle\Tests\Fixtures\UserTable($template);
@@ -43,7 +43,7 @@ class TableTest extends \PHPUnit_Framework_testCase
 
     }
 
-    public function testLabelsOfTableWithToString()
+    public function test_labels_of_table_with_toString()
     {
         $template = $this->getMock('\Twig_Environment');
         $table = new \Saturno\DataTablesBundle\Tests\Fixtures\UserTable($template);
@@ -57,9 +57,45 @@ class TableTest extends \PHPUnit_Framework_testCase
     }
 
     /**
+     * @expectedException \InvalidArgumentException
+     * @dataProvider providerNotTemplates
+     * @param mixed $wrongTemplate
+     */
+    public function test_setting_not_template($wrongTemplate)
+    {
+        $template = $this->getMock('\Twig_Environment');
+        $table = new \Saturno\DataTablesBundle\Tests\Fixtures\UserTable($template);
+        $table->setTemplate($wrongTemplate);
+
+    }
+
+    public function test_change_template()
+    {
+        $template = $this->getMock('\Twig_Environment');
+        $table = new \Saturno\DataTablesBundle\Tests\Fixtures\UserTable($template);
+
+        $this->assertInstanceOf('\Saturno\DataTablesBundle\Element\Table', $table->setTemplate('fooTemplate.html.twig'));
+    }
+
+    /**
+     * @dataProvider providerSettings
+     * @param $key
+     */
+    public function test_if_settings_default_contains_basic_info($key)
+    {
+        $template = $this->getMock('\Twig_Environment');
+        $table = new \Saturno\DataTablesBundle\Tests\Fixtures\UserTable($template);
+        $reflect = new \ReflectionClass($table);
+        $method = $reflect->getMethod('getSettings');
+        $method->setAccessible(true);
+
+        $this->assertArrayHasKey($key, $method->invoke($table));
+    }
+
+    /**
      * @dataProvider providerCorrectAddColumns
      */
-    public function testIfAddColumnInsertDataIntoColumnsArray($property, $label, $config, $expected)
+    public function test_if_add_column_insert_data_into_columns_array($property, $label, $config, $expected)
     {
         $table = $this->getTable();
         $table->addColumn($property, $label, $config);
@@ -67,11 +103,11 @@ class TableTest extends \PHPUnit_Framework_testCase
     }
 
     /**
-     * @dataProvider indexColumns
+     * @dataProvider providerIndexColumns
      * @param $index
      * @param $expected
      */
-    public function testIndexesAsNamesInColumns($index, $expected)
+    public function test_valid_indexes_as_names_in_columns($index, $expected)
     {
         $template  = $this->getMockForAbstractClass('\Twig_Environment');
         $table = new \Saturno\DataTablesBundle\Tests\Fixtures\UserTable($template);
@@ -80,7 +116,7 @@ class TableTest extends \PHPUnit_Framework_testCase
 
     }
 
-    public function testIfSetBodyReturnsCorrectContent()
+    public function test_valid_return_of_content_table()
     {
         $user1 = new \Saturno\DataTablesBundle\Tests\Fixtures\User(1,'Joseph','2013-05-23');
         $user2 = new \Saturno\DataTablesBundle\Tests\Fixtures\User(2,'Hellena','1988-06-27');
@@ -100,9 +136,30 @@ class TableTest extends \PHPUnit_Framework_testCase
         $this->assertEquals($expected, $table->getBody());
     }
 
+
+
+//    public function testRenderJavascript()
+//    {
+//        $template  = $this->getMockForAbstractClass('\Twig_Environment');
+//        $table = new \Saturno\DataTablesBundle\Tests\Fixtures\UserTable($template);
+//
+//        $this->assertInstanceOf('Twig',$table->createJavascript());
+//    }
+
     // @todo to test columns extras that does linked to entities
 
     // providers
+
+    public function providerSettings()
+    {
+        return array(
+            array('name'),
+            array('columns'),
+            array('body'),
+            array('config'),
+        );
+    }
+
     public function providerCorrectAddColumns()
     {
 
@@ -112,11 +169,19 @@ class TableTest extends \PHPUnit_Framework_testCase
         );
     }
 
-    public function indexColumns()
+    public function providerIndexColumns()
     {
         return array(
             array('0','id'),
             array(2,'date'),
+        );
+    }
+
+    public function providerNotTemplates()
+    {
+        return array(
+            array(0),
+            array(new \stdclass)
         );
     }
 
