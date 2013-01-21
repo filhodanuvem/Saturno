@@ -1,9 +1,0 @@
-services:
-    saturno_datatables_factory:
-        class: Saturno\DataTablesBundle\Manager\TableFactory
-        arguments: [@twig, @kernel]
-    filter_render:
-        class: Saturno\DataTablesBundle\Twig\TableExtension
-        arguments: [@twig]
-        tags:
-          - {name: twig.extension}
