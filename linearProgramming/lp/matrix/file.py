@@ -1,4 +1,5 @@
 from os import path
+import re
 
 class Reader(object):
     "Class that reads a file with a matrix to simples"
@@ -28,7 +29,8 @@ class Reader(object):
         matrix = []
         for i in range(order[0]):
             current_line = f.readline()
-            values_str = current_line.split(' ')
+            values_str = current_line.strip()
+            values_str = re.sub(r'(\s)+', ' ', values_str).split()
             values = [int(v) for v in values_str]
             matrix.append(values)
         f.close()
@@ -39,9 +41,10 @@ class Reader(object):
         lines = self.getOrder()[0]
         f = open(self.filename, 'r')
         for i, line in enumerate(f): 
+            line = re.sub(r'(\s)+', ' ', line)
             if i > lines : 
                 f.close()
-                return [int(v) for v in line.split(' ')]
+                return [int(v) for v in line.strip().split(' ')]
         f.close()
 
         return None
