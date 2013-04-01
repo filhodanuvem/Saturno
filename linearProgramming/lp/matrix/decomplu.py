@@ -95,3 +95,48 @@ def lu_print(a, p, n):
             
     print("L = %s" % l)
     print("U = %s" % u)
+
+def simplex(matrix, b, c, p, order):
+    B = [ None for i in range(order[1] - order[0]) ]
+    m = order[0]
+    n = order[1]
+    inb = [0 for i in range(m)]
+    ib = [0 for i in range(m)]
+    for i in range(n):
+        if (i < (n - m)):
+            inb[i] = i 
+        else:  
+            ib[i -m ] = i
+
+    for i in range(m):
+        B[i] = [None for x in range(order[0])]
+        for j in range(m):
+            B[i][j] = matrix[i][ib[j]]
+
+    xb = [0 for v in range(n)]
+
+    while(True):
+        lu(B, p, m)
+        
+        lu_solve(B, p ,b , xb, m)
+        #print(xb)
+        lb = xb[:]    
+        lu_solve_trans(B, p, b, lb, m)
+
+        
+        soma = 0.0
+        stop = True
+        r = [None for i in range(m)]
+
+        for i in range(n -m):
+            for j in range(m):
+                soma = soma + lb[j] * matrix[j][inb[i]]
+            r[inb[i]] = c[inb[i]] - soma
+            if r[inb[i]] < 0:
+                stop = False
+        print(r)
+        if stop:
+            print(xb)
+            return
+
+        
