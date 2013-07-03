@@ -76,8 +76,8 @@ class CallerTest extends \PHPUnit_Framework_TestCase
 	public function should_use_magic_vars()
 	{
 		$foo = new Foo;
-		$foo->addMethod('findBy[A-Z][a-z]+', function($pivot) {
-			return $_1;
+		$foo->addMethod('findBy([A-Z][a-z]+)', function($pivot) {
+			return $this->_1;
 		});
 
 		$this->assertEquals($foo->findByName('Bilbo'), 'Name');

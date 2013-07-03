@@ -32,12 +32,29 @@ Trait Caller
 			return $this->methods[$name];
 		}
 
+		$output_matches = array();
 		foreach ($this->methods as $pattern => $calle) {
-			if (preg_match("/^$pattern$/", $name)) {
+			if (preg_match_all("/^$pattern$/", $name, $output_matches)) {
+				$calle = $this->setExpressionsVars($calle, $output_matches);
 				return $calle;
 			}
 		}
 
 		return null;
+	}
+
+	protected function setExpressionsVars(Calle $calle, Array $output_matches)
+	{
+		if (count($output_matches) > 1) {
+			array_shift($output_matches);
+			// exists groups expressions
+			foreach ($output_matches as $key => $match) {
+				$index = $key + 1;
+				$varName = "_{$index}";
+				$calle->$varName = $match[0];
+				//$calle->addParameter($index, $match);
+			}
+		}
+		return $calle;
 	}
 }
