@@ -73,7 +73,7 @@ class CallerTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @test
 	 */
-	public function should_use_magic_vars()
+	public function should_use_magic_vars_groups()
 	{
 		$foo = new Foo;
 		$foo->addMethod('findBy([A-Z][a-z]+)', function($pivot) {
@@ -81,6 +81,21 @@ class CallerTest extends \PHPUnit_Framework_TestCase
 		});
 
 		$this->assertEquals($foo->findByName('Bilbo'), 'Name');
+	}
+
+	/**
+	 * @test
+	 **/ 
+	public function should_find_all_vars_groups()
+	{
+		$foo = new Foo;
+		$foo->addMethod('find(One|Two){0,1}By([A-Z][a-z]+)',function () {
+			return array($this->_1, $this->_2);
+		});
+
+		$this->assertEquals($foo->findOneByName(), array('One','Name'));
+		$this->assertEquals($foo->findTwoByName(), array('Two','Name'));
+		$this->assertEquals($foo->findByName(), array(null, 'Name'));
 	}
 
 	/**
