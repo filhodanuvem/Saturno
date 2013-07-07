@@ -5,14 +5,19 @@ namespace Gandalf\Entity;
 Trait Caller 
 {
 	protected $methods = array();
-	public function addMethod($methodPatern, $function)
+	public function def($fnPatternName, $function)
 	{
-		$this->methods[$methodPatern] = new Calle($function);
+		$this->methods[$fnPatternName] = new Calle($function);
+	}
+
+	public function short($fnPatternName, Array $calls)
+	{
+		$this->methods[$fnPatternName] = new CalleShort($calls);
 	}
 
 	public function __set($name, $function)
 	{
-		$this->addMethod($name, $function);
+		$this->def($name, $function);
 	}
 
 	public function __call($name, $params)

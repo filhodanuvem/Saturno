@@ -6,7 +6,7 @@ Class Calle
 {
 	protected $function; 
 
-	public $matches;
+	public $matches = array();
 
 	public function __construct($function)
 	{
@@ -24,7 +24,7 @@ Class Calle
 	public function __get($name)
 	{
 		if (preg_match('/_d+/', $name) === false) {
-			throw new \UnexpectedValueException("Error Processing Request");
+			throw new \UnexpectedValueException("Atributte {$name} dont exists");
 		}
 		
 		$index = str_replace('_', '', $name);
@@ -35,11 +35,4 @@ Class Calle
 		return $this->matches[$index];
 	}
 
-	/**
-	 * **caution** This behaviour is in test
-	 */ 
-	protected function addParameter($name, $value)
-	{
-		$this->function->parameter["\${$name}"] = $value; 
-	}
 }

@@ -1,0 +1,366 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"get_c",
+				"get_current_line"
+			],
+			[
+				"node",
+				"node_primitive"
+			],
+			[
+				"i",
+				"ind2"
+			],
+			[
+				"if",
+				"if	If Condition"
+			],
+			[
+				"lu",
+				"lu_solve_trans"
+			],
+			[
+				"cl",
+				"clone_a"
+			],
+			[
+				"m",
+				"matrix"
+			],
+			[
+				"value",
+				"values_str"
+			],
+			[
+				"piv",
+				"pivot_val"
+			],
+			[
+				"pivot_",
+				"pivot_i"
+			],
+			[
+				"sp",
+				"strip"
+			],
+			[
+				"get",
+				"getOrder"
+			],
+			[
+				"f",
+				"f"
+			],
+			[
+				"op",
+				"_openFile"
+			],
+			[
+				"fi",
+				"file_path"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "test_reprovado.py",
+			"settings":
+			{
+				"buffer_size": 427,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "reprovador.py",
+			"settings":
+			{
+				"buffer_size": 219,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "_instancia1",
+			"settings":
+			{
+				"buffer_size": 1,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/cloud/sources/www/Saturno/python/reprovado/_instancia2",
+		"/home/cloud/sources/www/tcc/cloudblocks/router.php",
+		"/home/cloud/Desktop/number",
+		"/home/cloud/sources/www/tcc/cloudblocks/compiler/main.cpp",
+		"/home/cloud/sources/www/tcc/cloudblocks/compiler/parser.cpp",
+		"/home/cloud/sources/www/tcc/cloudblocks/compiler/teste.cloud",
+		"/home/cloud/sources/www/tcc/cloudblocks/compiler/error.cpp",
+		"/home/cloud/sources/www/tcc/cloudblocks/compiler/converter.cpp",
+		"/home/cloud/sources/www/tcc/cloudblocks/compiler/ast.h",
+		"/home/cloud/sources/www/tcc/cloudblocks/compiler/parser.hpp",
+		"/home/cloud/sources/www/tcc/cloudblocks/compiler/semantic.cpp",
+		"/home/cloud/sources/djangolivre/djangolivre/settings.py",
+		"/home/cloud/sources/djangolivre/blog/models.py",
+		"/home/cloud/sources/djangolivre/db/fixtures.sql",
+		"/home/cloud/sources/programacaolinear/lp/matrix/decomplu.py",
+		"/home/cloud/sources/programacaolinear/main.py",
+		"/home/cloud/sources/programacaolinear/data/in1",
+		"/home/cloud/sources/programacaolinear/data/out1",
+		"/home/cloud/sources/edu/LU.c",
+		"/home/cloud/sources/programacaolinear/README.md",
+		"/home/cloud/sources/edu/LU.h",
+		"/home/cloud/sources/edu/main.c",
+		"/home/cloud/sources/programacaolinear/lp/matrix/file.py",
+		"/home/cloud/sources/programacaolinear/data/out_3x3",
+		"/home/cloud/sources/lu_8-3-2013/in_3x3",
+		"/home/cloud/sources/lu_8-3-2013/src/matrix.c",
+		"/home/cloud/sources/lu_8-3-2013/main.c",
+		"/home/cloud/sources/lu_8-3-2013/defs.c",
+		"/home/cloud/sources/lu_8-3-2013/lu.c",
+		"/home/cloud/sources/lu_8-3-2013/src/main.c",
+		"/home/cloud/sources/programacaolinear/lp/matrix/__init__.py",
+		"/home/cloud/sources/lu_8-3-2013/matrix.h",
+		"/home/cloud/sources/lu_8-3-2013/lu.h",
+		"/home/cloud/sources/lu_8-3-2013/defs.h",
+		"/home/cloud/sources/lu_8-3-2013/matrix.c",
+		"/home/cloud/sources/cacau/__init__.py",
+		"/home/cloud/sources/programacaolinear/tests/test_decomplu.py",
+		"/home/cloud/sources/programacaolinear/tests/fooquad",
+		"/home/cloud/sources/programacaolinear/data/in3",
+		"/home/cloud/sources/programacaolinear/tests/test_reader.py",
+		"/home/cloud/sources/programacaolinear/tests/__init__.py",
+		"/home/cloud/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings",
+		"/home/cloud/sources/programacaolinear/data/in2",
+		"/home/cloud/sources/programacaolinear/tests/foo",
+		"/home/cloud/Downloads/in_out_proj2.zip",
+		"/home/cloud/sources/programacaolinear/pl/matrix/reader.py",
+		"/home/cloud/sources/programacaolinear/pl/reader.py",
+		"/home/cloud/sources/programacaolinear/tests/test_reader",
+		"/home/cloud/sources/programacaolinear/__init__.py"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"g_array_Access_op",
+			"g_array_Access(",
+			"y[",
+			"cols",
+			"open(self.filename)",
+			"push",
+			"self.fp",
+			"del reader",
+			"f.",
+			"f",
+			"fp",
+			"()         ",
+			"filename",
+			" \n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "test_reprovado.py",
+					"settings":
+					{
+						"buffer_size": 427,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								207,
+								207
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "reprovador.py",
+					"settings":
+					{
+						"buffer_size": 219,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								218,
+								218
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "_instancia1",
+					"settings":
+					{
+						"buffer_size": 1,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1,
+								1
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 112.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/home/cloud/sources/www/node/node.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}

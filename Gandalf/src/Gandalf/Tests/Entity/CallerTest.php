@@ -12,7 +12,7 @@ class CallerTest extends \PHPUnit_Framework_TestCase
 	public function should_create_method_with_simple_name()
 	{
 		$foo = new Foo;
-		$foo->addMethod('bar', function(){
+		$foo->def('bar', function(){
 			return 'fooBar';
 		});
 
@@ -63,7 +63,7 @@ class CallerTest extends \PHPUnit_Framework_TestCase
 	public function should_call_methods_with_simple_pattern_name()
 	{
 		$foo = new Foo;
-		$foo->addMethod('findBy[A-Z][a-z]+', function($pivot){
+		$foo->def('findBy[A-Z][a-z]+', function($pivot){
 			return 'found!';
 		});
 
@@ -76,11 +76,11 @@ class CallerTest extends \PHPUnit_Framework_TestCase
 	public function should_use_magic_vars_groups()
 	{
 		$foo = new Foo;
-		$foo->addMethod('findBy([A-Z][a-z]+)', function($pivot) {
+		$foo->def('findBy([A-Z][a-z]+)', function($pivot) {
 			return $this->_1;
 		});
 
-		$this->assertEquals($foo->findByName('Bilbo'), 'Name');
+		$this->assertEquals('Name', $foo->findByName('Bilbo'));
 	}
 
 	/**
@@ -89,13 +89,92 @@ class CallerTest extends \PHPUnit_Framework_TestCase
 	public function should_find_all_vars_groups()
 	{
 		$foo = new Foo;
-		$foo->addMethod('find(One|Two){0,1}By([A-Z][a-z]+)',function () {
+		$foo->def('find(One|Two){0,1}By([A-Z][a-z]+)',function () {
 			return array($this->_1, $this->_2);
 		});
 
-		$this->assertEquals($foo->findOneByName(), array('One','Name'));
-		$this->assertEquals($foo->findTwoByName(), array('Two','Name'));
-		$this->assertEquals($foo->findByName(), array(null, 'Name'));
+		$this->assertEquals(array('One','Name'), $foo->findOneByName());
+		$this->assertEquals(array('Two','Name'), $foo->findTwoByName());
+		$this->assertEquals(array(null, 'Name'), $foo->findByName());
+	}
+
+	/**
+	* @test
+	*/
+	public function should_generate_all_matches()
+	{
+		$foo = new Foo;
+		$foo->def('find(One|Two){0,1}By([A-Z][a-z]+)',function () {
+			return $this->matches;
+		});
+
+		$this->assertEquals(array('findOneByName','One','Name'), $foo->findOneByName());
+		$this->assertEquals(array('findTwoByName','Two','Name'), $foo->findTwoByName());
+		$this->assertEquals(array('findByName',null, 'Name'), $foo->findByName());	
+	}
+
+    /**
+    * @test
+    */
+	public function should_crete_simple_shortcut()
+	{
+		$foo = new Foo;
+		$foo->short('sanitize', [
+			['trim', ":param1"],
+	        ['ucfirst', ":return1"],
+		]);
+
+		$this->assertEquals('Go destroy the ring, Bilbo!', $foo->sanitize(' go destroy the ring, Bilbo!    '));
+	}
+
+	/**
+	* @test
+	*/
+	public function should_crete_compound_shortcut()
+	{
+		$foo = new Foo;
+		$foo->short('getSlug', [
+			['trim', ":param1"],
+	        ['strtolower', ":return1"],
+	        ['str_replace',' ', '-',":return2"],
+		]);
+
+		$this->assertEquals('my-precioussss', $foo->getSlug('My preCiouSsSs'));
+		$this->assertEquals('smoug-is-a-danger-dragon', $foo->getSlug(' Smoug is a Danger dragon '));
+	}
+
+	/**
+	* @expectedException \InvalidArgumentException
+	* @test
+	*/ 
+	public function test_if_emit_error_with_array_without_name()
+	{
+		$foo = new Foo;
+		$foo->short('bar', [
+			['trim', ':param1'],
+			[]
+		]);
+
+		$foo->bar(' foo ');
+	}
+    
+    /**
+    * @test
+    * @expectedException \BadFunctionCallException
+    */ 
+	public function test_if_emit_error_calling_method_not_found_in_shortcut()
+	{
+		do {
+			$invalidFunction = uniqid();
+		} while (function_exists($invalidFunction));
+
+		$foo = new Foo;
+		$foo->short('bar', [
+			['trim', ':param1'],
+			[$invalidFunction, ':return1']
+		]);
+
+		$foo->bar(' foo ');	
 	}
 
 	/**
