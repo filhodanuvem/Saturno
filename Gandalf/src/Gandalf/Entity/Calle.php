@@ -6,13 +6,16 @@ Class Calle
 {
 	protected $function; 
 
+	protected $pattern;
+
 	public $matches = array();
 
-	public function __construct($function)
+	public function __construct($function, $pattern)
 	{
 		if ($function instanceof \Closure) {
 			$function = $function->bindTo($this);
 		}
+		$this->pattern  = $pattern;
 		$this->function = $function;
 	}
 
@@ -33,6 +36,15 @@ Class Calle
 		}
 
 		return $this->matches[$index];
+	}
+
+	public function getPattern()
+	{
+		return $this->pattern;
+	}
+
+	public function getFunction(){
+		return $this->function;
 	}
 
 }

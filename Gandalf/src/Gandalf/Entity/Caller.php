@@ -5,19 +5,46 @@ namespace Gandalf\Entity;
 Trait Caller 
 {
 	protected $methods = array();
+
 	public function def($fnPatternName, $function)
 	{
-		$this->methods[$fnPatternName] = new Calle($function);
+		$this->methods[$fnPatternName] = new Calle($function, $fnPatternName);
+
+		return $this;
 	}
 
 	public function short($fnPatternName, Array $calls)
 	{
 		$this->methods[$fnPatternName] = new CalleShort($calls);
+
+		return $this;
+	}
+
+	public function copy($calle, $object)
+	{
+		if (!is_object($object) || 
+            !(isset(class_uses($object)['Gandalf\Entity\Caller']))) {
+            throw new \InvalidArgumentException('Trying access method of a non object Caller');
+        }
+
+        $clone = clone $calle;
+        $object->def($calle->getPattern(), $calle);
+	}
+
+	public function move($calle, $object)
+	{
+		$this->copy($calle, $object);
+		unset($this->methods{$calle->getPattern()});
 	}
 
 	public function __set($name, $function)
 	{
 		$this->def($name, $function);
+	}
+
+	public function __get($name)
+	{
+		return $this->getCalleByPattern($name);
 	}
 
 	public function __call($name, $params)

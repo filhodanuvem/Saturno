@@ -3,6 +3,7 @@
 namespace Gandalf\Tests\Entity;
 
 use Gandalf\Tests\Fixtures\Foo;
+use Gandalf\Helper;
 
 class CallerTest extends \PHPUnit_Framework_TestCase
 {
@@ -144,8 +145,8 @@ class CallerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	* @expectedException \InvalidArgumentException
 	* @test
+	* @expectedException \InvalidArgumentException
 	*/ 
 	public function test_if_emit_error_with_array_without_name()
 	{
@@ -178,17 +179,118 @@ class CallerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo this is complicated, we will think about how
-	 * it could pass
+	 * It is complicated, to new methods exists by 
+	 * method_exists, we needs create a php extension
+	 * @test
 	 */ 
-	public function should_works_with_method_exists()
+	public function should_return_false_with_method_exists()
 	{
 		$foo = new Foo;
 		$foo->bla = function(){
 			echo 'ops!';
 		};
 
-		$this->assertTrue(method_exists($foo, 'bla'));
+		$this->assertFalse(method_exists($foo, 'bla'));
+	}
+
+	/**
+	* @test
+	*/ 
+	public function should_return_true_with_dynamic_method_exists()
+	{
+		$foo = new Foo;
+		$foo->split = 'trim';
+		$foo->short('write', [
+			['trim', ':param1'],
+			['printf', ':return1']
+		])->def('next', function($number){
+			return $number + 1;
+		}); 
+
+		$this->assertTrue(Helper::dynamic_method_exists('split', $foo));
+	}
+
+	/**
+	* @test
+	*/
+	public function should_copy_method_between_callers()
+	{
+		$foo = new Foo;
+		$foo->beInvisible = function(){
+			return 'Im invisible!';
+		};
+
+		$bar = new \Gandalf\Tests\Fixtures\Bar; 
+		$this->assertFalse(Helper::dynamic_method_exists('beInvisible', $bar));
+		
+		$foo->copy($foo->beInvisible, $bar);
+		$this->assertTrue(Helper::dynamic_method_exists('beInvisible', $bar));
+	}
+
+	/**
+	* @test
+	*/
+	public function should_move_method_between_callers()
+	{
+		$foo = new Foo;
+		$foo->beInvisible = function(){
+			return 'Im invisible!';
+		};
+
+		$bar = new \Gandalf\Tests\Fixtures\Bar; 
+		$this->assertFalse(Helper::dynamic_method_exists('beInvisible', $bar));
+		
+		$foo->move($foo->beInvisible, $bar);
+		$this->assertTrue(Helper::dynamic_method_exists('beInvisible', $bar));
+		$this->assertFalse(Helper::dynamic_method_exists('beInvisible', $foo));
+		
+	}
+
+	/**
+	* @test
+	*/
+	public function should_not_acess_real_field()
+	{
+		$foo = new Foo;
+		$foo->realField = 'Bolseiro';
+		$foo->beInvisible = function() {
+			return "{$this->realField}, Im invisible!";
+		};
+
+		$this->assertEquals(', Im invisible!', $foo->beInvisible());
+	}
+
+	/**
+	* @test
+	*/
+	public function should_acess_real_field()
+	{
+		$foo = new Foo;
+		$foo->realField = 'Bolseiro';
+		$foo->beInvisible = function() use ($foo){
+			return "{$foo->realField}, Im invisible!";
+		};
+
+		$this->assertEquals('Bolseiro, Im invisible!', $foo->beInvisible());
+	}
+
+	/**
+	* @test
+	* @expectedException \InvalidArgumentException
+	*/ 
+	public function should_emit_error_calling_dynamic_method_exists_with_non_object()
+	{
+		Helper::dynamic_method_exists('foo', 'bar');
+	}
+
+	/** 
+	* @test
+	*/ 
+	public function should_check_real_method()
+	{
+		$foo = new Foo;
+
+		$this->assertTrue(Helper::dynamic_method_exists('realMethod', $foo));
 	}
 
 }
