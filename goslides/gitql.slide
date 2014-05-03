@@ -1,0 +1,64 @@
+Gitql
+Uma linguagem de consulta pro git
+3 May 2014
+Tags: git, golang
+
+Claudson Oliveira
+Software Developer, Zocprint
+cloudson@outlook.com
+http://github.com/cloudson/gitql
+http://cloudson.github.io
+@cloudson
+
+* Motivação
+
+* Motivação
+
+- Textql, uma linguagem de consulta para arquivos csv
+- Como extraímos informações com git ? 
+    git log --author=cloudson
+    git log --before="2014-02-03"
+    git log --grep="shit"
+- Como fazer consultas complexas? 
+Quero 5 commits do ultimo mês com a palavra fuck feitos por cloudson 
+e com a palavra hell feitos pelo ale_borba.  
+    
+    git log -5 --author=cloudson --grep="fuck" --after="2014-04-01" --before="2014-04-30" ... ?
+
+Por quê não ...
+
+    select author, message 
+    from commits 
+    where (date > '2014-04-01' and date < '2014-05-01')
+    and ((author = 'cloudson' and 'fuck' in message) or (author = 'borba' and 'hell' in message))
+
+* Desafios 
+
+* Desafios 
+
+- Estratégia textql 
+    - Pegar csv e gerar um bd sqlite com um tabela
+- Problemas para gitql 
+    - Repositórios git mudam a todo momento
+    - Sincronizar tabelas antes de rodar sql ? 
+    - Para cada repositorio um banco sqlite diferente? 
+    - :( 
+
+* Construção 
+
+* Construção: Interpretador sql => git log 
+
+- Interpretador/compilador 
+    select * from commits where author = 'cloudson'
+
+* Construção: Libgit2 e git2go  
+
+.play samples/git2go.go
+
+* Golang
+
+* Impressões 
+
+- Compilada e tipagem forte
+- Rigidez
+- Simples
