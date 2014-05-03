@@ -48,17 +48,47 @@ Por quê não ...
 
 * Construção: Interpretador sql => git log 
 
-- Interpretador/compilador 
-    select * from commits where author = 'cloudson'
+Linguagem Fonte:
+
+    select * from commits where date > '2014-04-01' and date < '2014-04-10' 
+Objetivo:
+
+.image images/tree.jpg
+
+  
+.link http://www.amazon.com/Compilers-Principles-Techniques-Tools-Edition/dp/0321486811 Análise léxica e sintática
+
 
 * Construção: Libgit2 e git2go  
 
-.play samples/git2go.go
+.code samples/git2go.go
 
-* Golang
+* Construção: Caso real
 
-* Impressões 
+.code samples/walker.go
 
-- Compilada e tipagem forte
-- Rigidez
-- Simples
+* Golang - impressões
+
+* Rigidez
+.play samples/rigida.go
+
+.play samples/rigida2.go
+
+* Simplicidade
+.code samples/simples.go
+.code samples/interface.go
+
+* Etc...
+
+Linkar com C
+
+.code samples/c.go
+
+Gerência de pacotes
+
+    go get github.com/cloudson/gitql
+Sem guerra sobre espaços e tabs
+
+    go fmt
+
+
